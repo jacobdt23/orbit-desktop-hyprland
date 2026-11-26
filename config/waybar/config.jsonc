@@ -1,4 +1,4 @@
-// Single unified top bar configuration for Hyprland / Waybar
+// Top bar + floating frosted-glass bottom dock for Hyprland / Waybar
 [
     {
         "name": "top-bar",
@@ -12,9 +12,7 @@
         "modules-left": [
             "custom/brand",
             "hyprland/workspaces",
-            "custom/term",
-            "custom/files",
-            "custom/web"
+            "hyprland/window"
         ],
         "modules-center": [
             "clock",
@@ -34,8 +32,8 @@
         ],
         "custom/brand": {
             "format": "󰣇",
-            "tooltip": false,
-            "on-click": "rofi -show drun"
+            "tooltip-format": "Orbit Launch",
+            "on-click": "/home/jacob/.local/bin/orbit-launch"
         },
         "hyprland/workspaces": {
             "disable-scroll": true,
@@ -43,20 +41,9 @@
             "format": "{name}",
             "on-click": "activate"
         },
-        "custom/term": {
-            "format": "󰞷",
-            "tooltip-format": "Terminal (Kitty)",
-            "on-click": "kitty"
-        },
-        "custom/files": {
-            "format": "󰉋",
-            "tooltip-format": "File Manager (Thunar)",
-            "on-click": "thunar"
-        },
-        "custom/web": {
-            "format": "󰈹",
-            "tooltip-format": "Web Browser (Brave)",
-            "on-click": "brave"
+        "hyprland/window": {
+            "max-length": 42,
+            "separate-outputs": true
         },
         "clock": {
             "format": "󰥔  {:%a, %b %d • %I:%M %p}",
@@ -82,7 +69,7 @@
         "custom/keys": {
             "format": "󰌌",
             "tooltip-format": "Show Shortcuts",
-            "on-click": "notify-send 'Keybinds' 'Super+Return: Terminal\nSuper+Space: App Launcher\nSuper+E: Files\nSuper+B: Browser\nSuper+C: Close Window\nSuper+Shift+Q: Exit'"
+            "on-click": "notify-send 'Keybinds' 'Super+Return: Orbit Term\nSuper+D: Orbit Launch\nSuper+E: Orbit Files\nSuper+N: LazyVim\nSuper+B: Browser\nSuper+C: Close Window\nSuper+Shift+Q: Exit'"
         },
         "cpu": {
             "interval": 2,
@@ -123,6 +110,66 @@
             "format": " ⏻ ",
             "tooltip": false,
             "on-click": "hyprctl dispatch exit"
+        }
+    },
+    {
+        "name": "bottom-dock",
+        "layer": "top",
+        "position": "bottom",
+        "height": 46,
+        "margin-bottom": 8,
+        "margin-left": 180,
+        "margin-right": 180,
+        "spacing": 4,
+        "modules-left": [
+            "custom/start",
+            "custom/search"
+        ],
+        "modules-center": [
+            "custom/term",
+            "custom/files",
+            "custom/web",
+            "wlr/taskbar"
+        ],
+        "modules-right": [
+            "custom/showdesktop"
+        ],
+        "custom/start": {
+            "format": "󰀻 Apps",
+            "tooltip-format": "Orbit Launch (Super+D)",
+            "on-click": "/home/jacob/.local/bin/orbit-launch"
+        },
+        "custom/search": {
+            "format": " Search…",
+            "tooltip-format": "Search apps, = math, > run",
+            "on-click": "/home/jacob/.local/bin/orbit-launch"
+        },
+        "custom/term": {
+            "format": "󰞷",
+            "tooltip-format": "Orbit Term (Super+Return)",
+            "on-click": "/home/jacob/.local/bin/orbit-term"
+        },
+        "custom/files": {
+            "format": "󰉋",
+            "tooltip-format": "Orbit Files (Super+E)",
+            "on-click": "/home/jacob/.local/bin/orbit-files"
+        },
+        "custom/web": {
+            "format": "󰈹",
+            "tooltip-format": "Brave Browser (Super+B)",
+            "on-click": "brave"
+        },
+        "wlr/taskbar": {
+            "format": "{icon}",
+            "icon-size": 20,
+            "tooltip-format": "{title}",
+            "on-click": "activate",
+            "on-click-middle": "close"
+        },
+        "custom/showdesktop": {
+            "format": " ",
+            "tooltip-format": "Switch to Empty Workspace",
+            "on-click": "hyprctl dispatch workspace empty"
         }
     }
 ]
