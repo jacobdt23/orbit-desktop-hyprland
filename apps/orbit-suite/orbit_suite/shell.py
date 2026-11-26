@@ -39,25 +39,25 @@ window.orbit-dock-window {
 .orbit-top-bar {
     background-color: rgba(20, 22, 34, 0.80);
     border: 1px solid rgba(122, 162, 247, 0.30);
-    border-radius: 12px;
-    padding: 4px 8px;
+    border-radius: 10px;
+    padding: 2px 6px;
 }
 
 .orbit-bottom-dock {
     background-color: rgba(20, 22, 34, 0.82);
     border: 1px solid rgba(122, 162, 247, 0.32);
-    border-radius: 16px;
-    padding: 5px 10px;
+    border-radius: 10px;
+    padding: 2px 8px;
 }
 
 .orbit-pill {
     background-color: rgba(26, 27, 38, 0.78);
     border: 1px solid rgba(41, 46, 66, 0.85);
-    border-radius: 8px;
-    padding: 3px 10px;
-    min-height: 24px;
+    border-radius: 7px;
+    padding: 1px 8px;
+    min-height: 20px;
     color: #c0caf5;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
 }
 
@@ -86,12 +86,12 @@ window.orbit-dock-window {
 .orbit-ws-btn {
     background-color: rgba(26, 27, 38, 0.72);
     border: 1px solid rgba(41, 46, 66, 0.85);
-    border-radius: 7px;
-    padding: 2px 8px;
-    min-width: 24px;
-    min-height: 24px;
+    border-radius: 6px;
+    padding: 1px 6px;
+    min-width: 20px;
+    min-height: 20px;
     color: #565f89;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
 }
 
@@ -114,9 +114,9 @@ window.orbit-dock-window {
 .orbit-power-btn {
     background-color: rgba(20, 22, 31, 0.9);
     border: 1px solid rgba(247, 118, 142, 0.75);
-    border-radius: 8px;
-    padding: 2px 8px;
-    min-height: 24px;
+    border-radius: 7px;
+    padding: 1px 6px;
+    min-height: 20px;
     color: #f7768e;
 }
 
@@ -128,10 +128,10 @@ window.orbit-dock-window {
 .orbit-dock-btn {
     background-color: transparent;
     border: 1px solid transparent;
-    border-radius: 12px;
-    padding: 5px 7px;
-    min-width: 38px;
-    min-height: 38px;
+    border-radius: 8px;
+    padding: 2px 6px;
+    min-width: 28px;
+    min-height: 28px;
     transition: all 140ms ease;
 }
 
@@ -283,9 +283,9 @@ class TopBarWindow(Gtk.ApplicationWindow):
         Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.TOP, True)
         Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.LEFT, True)
         Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.RIGHT, True)
-        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.TOP, 6)
-        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.LEFT, 12)
-        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.RIGHT, 12)
+        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.TOP, 4)
+        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.LEFT, 10)
+        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.RIGHT, 10)
         Gtk4LayerShell.auto_exclusive_zone_enable(self)
 
         bar = Gtk.CenterBox()
@@ -414,7 +414,7 @@ class TopBarWindow(Gtk.ApplicationWindow):
 
 
 class BottomDockWindow(Gtk.ApplicationWindow):
-    """Floating frosted-glass bottom dock with real app icons + live running taskbar."""
+    """Full-width slim frosted-glass bottom bar with real app icons + live running taskbar."""
 
     def __init__(self, app: Gtk.Application, monitor: Gdk.Monitor) -> None:
         super().__init__(application=app)
@@ -426,32 +426,53 @@ class BottomDockWindow(Gtk.ApplicationWindow):
         Gtk4LayerShell.set_layer(self, Gtk4LayerShell.Layer.TOP)
         Gtk4LayerShell.set_monitor(self, monitor)
         Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.BOTTOM, True)
-        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.BOTTOM, 8)
+        Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.LEFT, True)
+        Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.RIGHT, True)
+        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.BOTTOM, 4)
+        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.LEFT, 10)
+        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.RIGHT, 10)
         Gtk4LayerShell.auto_exclusive_zone_enable(self)
 
-        dock = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        dock.add_css_class("orbit-bottom-dock")
-        self.set_child(dock)
+        bar = Gtk.CenterBox()
+        bar.add_css_class("orbit-bottom-dock")
+        self.set_child(bar)
 
-        # Pinned Orbit & core apps
+        # Left: Apps + Search trigger
+        left = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        search_btn = Gtk.Button.new_with_label("Search apps…")
+        search_btn.add_css_class("orbit-pill")
+        search_btn.set_tooltip_text("Orbit Launch (Super+D)")
+        search_btn.connect("clicked", lambda *_: _spawn("/home/jacob/.local/bin/orbit-launch"))
+        left.append(search_btn)
+        bar.set_start_widget(left)
+
+        # Center: Pinned Orbit apps + running window icons
+        center = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
         for label, icon_name, cmd in PINNED_APPS:
             btn = Gtk.Button()
             btn.add_css_class("orbit-dock-btn")
             btn.set_tooltip_text(label)
             img = Gtk.Image.new_from_icon_name(icon_name)
-            img.set_pixel_size(28)
+            img.set_pixel_size(20)
             btn.set_child(img)
             btn.connect("clicked", lambda _b, c=cmd: _spawn(c))
-            dock.append(btn)
+            center.append(btn)
 
         self._sep = Gtk.Box()
         self._sep.add_css_class("orbit-dock-sep")
         self._sep.set_visible(False)
-        dock.append(self._sep)
+        center.append(self._sep)
 
-        # Dynamic running windows box
-        self._running_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        dock.append(self._running_box)
+        self._running_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
+        center.append(self._running_box)
+        bar.set_center_widget(center)
+
+        # Right: Show Desktop / Empty Workspace button
+        desk_btn = Gtk.Button.new_with_label("Desktop")
+        desk_btn.add_css_class("orbit-pill")
+        desk_btn.set_tooltip_text("Switch to Empty Workspace")
+        desk_btn.connect("clicked", lambda *_: _spawn("hyprctl dispatch workspace empty"))
+        bar.set_end_widget(desk_btn)
 
     def update_clients(self, clients: list[dict[str, object]], active_addr: str) -> None:
         while (child := self._running_box.get_first_child()) is not None:
@@ -476,7 +497,7 @@ class BottomDockWindow(Gtk.ApplicationWindow):
             btn.set_tooltip_text(title)
 
             img = Gtk.Image.new_from_icon_name(_resolve_icon_name(wm_class))
-            img.set_pixel_size(28)
+            img.set_pixel_size(20)
             btn.set_child(img)
 
             btn.connect("clicked", lambda _b, a=addr: _spawn(f"hyprctl dispatch focuswindow address:{a}"))
