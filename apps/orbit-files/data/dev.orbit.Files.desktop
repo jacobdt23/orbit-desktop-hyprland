@@ -16,7 +16,7 @@ StartupWMClass=dev.orbit.Files
 SingleMainWindow=false
 DBusActivatable=false
 PrefersNonDefaultGPU=false
-OnlyShowIn=X-Hyprland-Standalone;
+OnlyShowIn=X-Hyprland-Standalone;X-Orbit-Qtile;
 Actions=new-window;open-home;open-documents;open-downloads;open-trash;open-filesystem;
 
 [Desktop Action new-window]

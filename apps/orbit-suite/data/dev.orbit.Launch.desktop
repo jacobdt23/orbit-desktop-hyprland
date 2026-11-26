@@ -14,4 +14,4 @@ StartupNotify=true
 StartupWMClass=dev.orbit.Launch
 SingleMainWindow=true
 DBusActivatable=false
-OnlyShowIn=X-Hyprland-Standalone;
+OnlyShowIn=X-Hyprland-Standalone;X-Orbit-Qtile;

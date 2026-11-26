@@ -15,7 +15,7 @@ StartupNotify=true
 StartupWMClass=dev.orbit.Edit
 SingleMainWindow=false
 DBusActivatable=false
-OnlyShowIn=X-Hyprland-Standalone;
+OnlyShowIn=X-Hyprland-Standalone;X-Orbit-Qtile;
 Actions=new-window;
 
 [Desktop Action new-window]
