@@ -157,7 +157,7 @@ window.orbit-dock-window {
 """
 
 PINNED_APPS = [
-    ("Orbit Launch", "applications-other", "/home/jacob/.local/bin/orbit-launch"),
+    ("Orbit Launch", "launch", "/home/jacob/.local/bin/orbit-launch"),
     ("Orbit Term", "utilities-terminal", "/home/jacob/.local/bin/orbit-term"),
     ("Orbit Files", "system-file-manager", "/home/jacob/.local/bin/orbit-files"),
     ("Orbit Edit (LazyVim)", "nvim", "/home/jacob/.local/bin/orbit-nvim"),
@@ -170,7 +170,7 @@ CLASS_ICON_MAP = {
     "dev.orbit.term": "utilities-terminal",
     "dev.orbit.edit": "nvim",
     "dev.orbit.view": "image-x-generic",
-    "dev.orbit.launch": "applications-other",
+    "dev.orbit.launch": "launch",
     "brave-browser": "brave-browser",
     "kitty": "kitty",
     "antigravity": "antigravity",
@@ -298,8 +298,8 @@ class TopBarWindow(Gtk.ApplicationWindow):
         brand_btn = Gtk.Button()
         brand_btn.add_css_class("orbit-pill")
         brand_btn.set_tooltip_text("Orbit Launch (Super+D)")
-        brand_icon = Gtk.Image.new_from_icon_name("applications-other")
-        brand_icon.set_pixel_size(16)
+        brand_icon = Gtk.Image.new_from_icon_name("distributor-logo-archlinux")
+        brand_icon.set_pixel_size(18)
         brand_btn.set_child(brand_icon)
         brand_btn.connect("clicked", lambda *_: _spawn("/home/jacob/.local/bin/orbit-launch"))
         left.append(brand_btn)
