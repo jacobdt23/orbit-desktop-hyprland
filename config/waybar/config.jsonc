@@ -116,52 +116,71 @@
         "name": "bottom-dock",
         "layer": "top",
         "position": "bottom",
-        "height": 46,
+        "height": 48,
         "margin-bottom": 8,
         "margin-left": 180,
         "margin-right": 180,
-        "spacing": 4,
+        "spacing": 6,
         "modules-left": [
-            "custom/start",
+            "image#apps",
             "custom/search"
         ],
         "modules-center": [
-            "custom/term",
-            "custom/files",
-            "custom/web",
+            "image#term",
+            "image#files",
+            "image#edit",
+            "image#view",
+            "image#web",
             "wlr/taskbar"
         ],
         "modules-right": [
             "custom/showdesktop"
         ],
-        "custom/start": {
-            "format": "󰀻 Apps",
+        "image#apps": {
+            "path": "/usr/share/icons/Papirus-Dark/48x48/apps/applications-other.svg",
+            "size": 24,
             "tooltip-format": "Orbit Launch (Super+D)",
             "on-click": "/home/jacob/.local/bin/orbit-launch"
         },
         "custom/search": {
-            "format": " Search…",
+            "format": "Search…",
             "tooltip-format": "Search apps, = math, > run",
             "on-click": "/home/jacob/.local/bin/orbit-launch"
         },
-        "custom/term": {
-            "format": "󰞷",
+        "image#term": {
+            "path": "/usr/share/icons/Papirus-Dark/48x48/apps/utilities-terminal.svg",
+            "size": 24,
             "tooltip-format": "Orbit Term (Super+Return)",
             "on-click": "/home/jacob/.local/bin/orbit-term"
         },
-        "custom/files": {
-            "format": "󰉋",
+        "image#files": {
+            "path": "/usr/share/icons/Papirus-Dark/48x48/apps/system-file-manager.svg",
+            "size": 24,
             "tooltip-format": "Orbit Files (Super+E)",
             "on-click": "/home/jacob/.local/bin/orbit-files"
         },
-        "custom/web": {
-            "format": "󰈹",
+        "image#edit": {
+            "path": "/usr/share/icons/Papirus-Dark/48x48/apps/nvim.svg",
+            "size": 24,
+            "tooltip-format": "Orbit Edit — LazyVim (Super+N)",
+            "on-click": "/home/jacob/.local/bin/orbit-nvim"
+        },
+        "image#view": {
+            "path": "/usr/share/icons/Papirus-Dark/48x48/mimetypes/image-x-generic.svg",
+            "size": 24,
+            "tooltip-format": "Orbit View",
+            "on-click": "/home/jacob/.local/bin/orbit-view"
+        },
+        "image#web": {
+            "path": "/usr/share/icons/Papirus-Dark/48x48/apps/brave-browser.svg",
+            "size": 24,
             "tooltip-format": "Brave Browser (Super+B)",
             "on-click": "brave"
         },
         "wlr/taskbar": {
             "format": "{icon}",
-            "icon-size": 20,
+            "icon-theme": "Papirus-Dark",
+            "icon-size": 24,
             "tooltip-format": "{title}",
             "on-click": "activate",
             "on-click-middle": "close"

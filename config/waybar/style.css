@@ -240,3 +240,18 @@ window#waybar.bottom-dock {
 #custom-showdesktop:hover {
     background-color: #7aa2f7;
 }
+
+/* Real App Icon Dock Items */
+#image {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 4px 8px;
+    margin: 4px 2px;
+    transition: all 0.18s ease;
+}
+
+#image:hover {
+    background-color: rgba(122, 162, 247, 0.18);
+    border-color: rgba(122, 162, 247, 0.5);
+}
