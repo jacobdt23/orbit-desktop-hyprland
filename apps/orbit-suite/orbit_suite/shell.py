@@ -69,47 +69,112 @@ window.orbit-dock-window {
     border-color: rgba(189, 147, 249, 0.75);
 }
 
+menubutton.orbit-clock-pill > button,
 .orbit-clock-pill {
-    border-color: rgba(189, 147, 249, 0.45);
+    background-color: rgba(139, 233, 253, 0.16);
+    border: 1px solid rgba(139, 233, 253, 0.45);
+    border-bottom: 3px solid #8be9fd;
     color: #8be9fd;
-    font-weight: 700;
+    font-weight: 800;
 }
 
-.orbit-window-title {
-    color: #8be9fd;
+label.orbit-window-title {
+    background-color: rgba(189, 147, 249, 0.14);
+    border: 1px solid rgba(189, 147, 249, 0.35);
+    border-bottom: 3px solid #bd93f9;
+    color: #f8f8f2;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-.orbit-cpu { color: #bd93f9; border-bottom: 2px solid rgba(189, 147, 249, 0.7); }
-.orbit-mem { color: #ff79c6; border-bottom: 2px solid rgba(255, 121, 198, 0.7); }
-.orbit-disk { color: #ffb86c; border-bottom: 2px solid rgba(255, 184, 108, 0.7); }
-.orbit-vol { color: #50fa7b; border-bottom: 2px solid rgba(80, 250, 123, 0.7); }
-.orbit-net { color: #8be9fd; border-bottom: 2px solid rgba(139, 233, 253, 0.7); }
-.orbit-media { color: #ff79c6; border-bottom: 2px solid rgba(255, 121, 198, 0.75); }
-.orbit-bat { color: #50fa7b; border-bottom: 2px solid rgba(80, 250, 123, 0.7); }
-.orbit-bat-low { color: #ff5555; border-bottom: 2px solid #ff5555; }
+button.orbit-cpu {
+    background-color: rgba(189, 147, 249, 0.18);
+    border: 1px solid rgba(189, 147, 249, 0.45);
+    border-bottom: 3px solid #bd93f9;
+    color: #d6acff;
+}
+
+button.orbit-mem {
+    background-color: rgba(255, 121, 198, 0.18);
+    border: 1px solid rgba(255, 121, 198, 0.45);
+    border-bottom: 3px solid #ff79c6;
+    color: #ff92df;
+}
+
+button.orbit-disk {
+    background-color: rgba(255, 184, 108, 0.18);
+    border: 1px solid rgba(255, 184, 108, 0.45);
+    border-bottom: 3px solid #ffb86c;
+    color: #ffb86c;
+}
+
+button.orbit-net {
+    background-color: rgba(241, 250, 140, 0.16);
+    border: 1px solid rgba(241, 250, 140, 0.45);
+    border-bottom: 3px solid #f1fa8c;
+    color: #f1fa8c;
+}
+
+menubutton.orbit-vol > button,
+.orbit-vol {
+    background-color: rgba(80, 250, 123, 0.18);
+    border: 1px solid rgba(80, 250, 123, 0.45);
+    border-bottom: 3px solid #50fa7b;
+    color: #69ff94;
+}
+
+menubutton.orbit-media > button,
+.orbit-media {
+    background-color: rgba(255, 121, 198, 0.22);
+    border: 1px solid rgba(255, 121, 198, 0.55);
+    border-bottom: 3px solid #ff79c6;
+    color: #ff92df;
+}
+
+button.orbit-bat {
+    background-color: rgba(80, 250, 123, 0.18);
+    border: 1px solid rgba(80, 250, 123, 0.45);
+    border-bottom: 3px solid #50fa7b;
+    color: #50fa7b;
+}
+
+button.orbit-bat-low {
+    background-color: rgba(255, 85, 85, 0.25);
+    border: 1px solid rgba(255, 85, 85, 0.65);
+    border-bottom: 3px solid #ff5555;
+    color: #ff6e6e;
+}
+
+button.orbit-theme-btn {
+    background-color: rgba(139, 233, 253, 0.18);
+    border: 1px solid rgba(139, 233, 253, 0.45);
+    border-bottom: 3px solid #8be9fd;
+    color: #8be9fd;
+}
 
 .orbit-ws-btn {
     background-color: rgba(40, 42, 54, 0.85);
     border: 1px solid rgba(68, 71, 90, 0.9);
     border-radius: 6px;
-    padding: 1px 6px;
-    min-width: 20px;
+    padding: 1px 7px;
+    min-width: 22px;
     min-height: 20px;
     color: #6272a4;
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .orbit-ws-btn.occupied {
-    color: #f8f8f2;
-    border-color: rgba(189, 147, 249, 0.4);
+    background-color: rgba(139, 233, 253, 0.14);
+    color: #8be9fd;
+    border-color: rgba(139, 233, 253, 0.45);
+    border-bottom: 3px solid #8be9fd;
 }
 
 .orbit-ws-btn.active {
     background: linear-gradient(135deg, #bd93f9 0%, #ff79c6 100%);
-    border-color: #bd93f9;
+    border-color: #ff79c6;
+    border-bottom: 3px solid #f1fa8c;
     color: #21222c;
     font-weight: 900;
 }
@@ -567,6 +632,7 @@ class TopBarWindow(Gtk.ApplicationWindow):
         # 1-click Orbit Theme / Wallpaper switcher
         theme_btn = Gtk.Button()
         theme_btn.add_css_class("orbit-pill")
+        theme_btn.add_css_class("orbit-theme-btn")
         theme_btn.set_tooltip_text("Orbit Theme & Wallpapers")
         theme_icon = Gtk.Image.new_from_icon_name("preferences-desktop-wallpaper-symbolic")
         theme_icon.set_pixel_size(14)
