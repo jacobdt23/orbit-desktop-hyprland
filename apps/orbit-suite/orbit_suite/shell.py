@@ -489,17 +489,8 @@ class TopBarWindow(Gtk.ApplicationWindow):
         bar.add_css_class("orbit-top-bar")
         self.set_child(bar)
 
-        # Left: Launcher + Workspaces + Active Window Title
+        # Left: Workspaces + Active Window Title (app menu kept on Super key & bottom bar)
         left = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-
-        brand_btn = Gtk.Button()
-        brand_btn.add_css_class("orbit-pill")
-        brand_btn.set_tooltip_text("Orbit Launch (Super+D)")
-        brand_icon = Gtk.Image.new_from_icon_name("distributor-logo-archlinux")
-        brand_icon.set_pixel_size(18)
-        brand_btn.set_child(brand_icon)
-        brand_btn.connect("clicked", lambda *_: _spawn(_bin("orbit-launch")))
-        left.append(brand_btn)
 
         self._ws_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
         self._ws_buttons: dict[int, Gtk.Button] = {}
