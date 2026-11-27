@@ -42,26 +42,46 @@ window.orbit-dock-window {
 .orbit-top-bar {
     background-color: rgba(33, 34, 44, 0.86);
     border: 1px solid rgba(189, 147, 249, 0.35);
-    border-radius: 10px;
-    padding: 2px 6px;
+    border-radius: 9px;
+    padding: 1px 6px;
 }
 
 .orbit-bottom-dock {
     background-color: rgba(33, 34, 44, 0.86);
     border: 1px solid rgba(189, 147, 249, 0.35);
-    border-radius: 10px;
-    padding: 2px 8px;
+    border-radius: 9px;
+    padding: 1px 8px;
 }
 
-.orbit-pill {
+.orbit-pill,
+menubutton.orbit-pill > button {
     background-color: rgba(40, 42, 54, 0.88);
     border: 1px solid rgba(68, 71, 90, 0.9);
-    border-radius: 7px;
-    padding: 1px 8px;
-    min-height: 20px;
+    border-radius: 6px;
+    padding: 1px 7px;
+    min-height: 18px;
     color: #f8f8f2;
     font-size: 10px;
     font-weight: 600;
+}
+
+menubutton.orbit-pill,
+menubutton.orbit-power-btn {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    min-height: 18px;
+}
+
+menubutton.orbit-power-btn > button {
+    background-color: rgba(33, 34, 44, 0.92);
+    border: 1px solid rgba(255, 85, 85, 0.75);
+    border-radius: 6px;
+    padding: 1px 6px;
+    min-height: 18px;
+    min-width: 22px;
+    color: #ff5555;
 }
 
 .orbit-pill:hover {
