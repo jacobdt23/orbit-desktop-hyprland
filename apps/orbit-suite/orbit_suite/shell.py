@@ -546,16 +546,10 @@ class TopBarWindow(Gtk.ApplicationWindow):
         # Right: CPU + Sparkline, RAM, Disk, Net, Battery, Volume Slider Popover, Theme, Power
         right = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
 
-        self._cpu_btn = Gtk.Button()
+        self._cpu_btn = Gtk.Button.new_with_label("CPU 0%")
         self._cpu_btn.add_css_class("orbit-pill")
         self._cpu_btn.add_css_class("orbit-cpu")
-        cpu_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        self._cpu_spark = CpuSparkline()
-        self._cpu_lbl = Gtk.Label(label="0%")
-        cpu_box.append(self._cpu_spark)
-        cpu_box.append(self._cpu_lbl)
-        self._cpu_btn.set_child(cpu_box)
-        self._cpu_btn.set_tooltip_text("Live CPU Usage (click for btop)")
+        self._cpu_btn.set_tooltip_text("CPU Usage (click for btop)")
         self._cpu_btn.connect("clicked", lambda *_: _spawn("kitty -e btop"))
         right.append(self._cpu_btn)
 
@@ -690,8 +684,7 @@ class TopBarWindow(Gtk.ApplicationWindow):
         media_short: str | None,
         media_full: str,
     ) -> None:
-        self._cpu_spark.push(cpu)
-        self._cpu_lbl.set_label(f"{cpu}%")
+        self._cpu_btn.set_label(f"CPU {cpu}%")
         self._mem_btn.set_label(f"RAM {mem}")
         self._disk_btn.set_label(f"Disk {disk}")
         self._net_btn.set_label(net)
